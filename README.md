@@ -1,6 +1,6 @@
 # Mouse Clicker - 鼠标连点器
 ## Content - 目录
-[Project Brief - 项目简介](#project-brief-br-项目简介) </br>
+[Project Brief — 项目简介](#project-brief-br-项目简介) </br>
 [Dependencies Installation — 安装依赖项](#dependencies-installation-br-安装依赖项) </br>
 [Running Program — 运行程序](#运行程序-br-running-program) </br>
 [Contact with Me — 联系作者](#联系作者-br-contact-with-me)
