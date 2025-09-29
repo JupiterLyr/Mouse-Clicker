@@ -7,15 +7,15 @@ import time
 import webbrowser
 from pathlib import Path
 
-win_width = 360
-win_height = 580
-version = 2.2
+WIN_WIDTH = 360
+WIN_HEIGHT = 580
+VERSION = 2.2
 
 
 class MouseClickerApp:
     def __init__(self, master):
         self.master = master
-        self.master.title(f"鼠标连点器 v{version}")
+        self.master.title(f"鼠标连点器 v{VERSION}")
 
         self.running = False
         self.click_interval = tk.DoubleVar(value=0.1)
@@ -103,18 +103,19 @@ class MouseClickerApp:
         force2exit.pack()
 
         # 版权信息与联系方式
-        cprt = tk.Label(self.master, text=f"JupiterLyr © Version {version}", font=("Times New Roman", 9))
+        cprt = tk.Label(self.master, text=f"JupiterLyr © Version {VERSION}", font=("Times New Roman", 9))
         email = tk.Label(self.master, text="✉联系作者", font=("宋体", 9), fg="blue", cursor="hand2")
         cprt.pack(pady=25)
-        email.place(x=win_width-85, y=win_height-25)
+        email.place(x=WIN_WIDTH - 85, y=WIN_HEIGHT - 25)
         email.bind("<Button-1>", lambda event: send_email())
 
     def setup_keyboard_shortcuts(self):
-        # 监听快捷键
+        """监听快捷键"""
         keyboard.add_hotkey('ctrl+alt+f6', lambda: self.toggle_clicker())
         keyboard.add_hotkey('ctrl+shift+q', lambda: self.master.quit())  # 退出应用
 
     def toggle_clicker(self):
+        """设置连点器参数"""
         if not self.running:
             try:
                 interval = self.click_interval.get()
@@ -187,6 +188,7 @@ class MouseClickerApp:
             self.stop_clicker()
 
     def clicker_thread(self, interval):
+        """核心操作子线程"""
         time.sleep(0.1)
         while self.running:
             if self.click_type.get() == "left":
@@ -196,6 +198,7 @@ class MouseClickerApp:
             time.sleep(interval)
 
     def hold_click_thread(self, hold_duration, interval):
+        """核心操作子线程（含按住）"""
         time.sleep(0.1)
         while self.running and self.hold_enabled.get():
             if self.click_type.get() == "left":
@@ -209,6 +212,7 @@ class MouseClickerApp:
             time.sleep(interval)
 
     def stop_clicker(self):
+        """停止连点器"""
         self.running = False
         self.start_stop_button.config(text="正在关闭线程", state="disabled", cursor="arrow")
 
@@ -245,7 +249,7 @@ def send_email():
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.geometry(str(win_width) + "x" + str(win_height))
+    root.geometry(str(WIN_WIDTH) + "x" + str(WIN_HEIGHT))
     root.resizable(False, False)
     root.iconbitmap(Path(__file__).parent / 'icon.ico')
     app = MouseClickerApp(root)
